@@ -30,13 +30,24 @@ export class TutorialPage {
   ];
 
 
-  constructor(public navCtrl: NavController) { 
+  constructor(
+    public navCtrl: NavController,
+    public menu: MenuController,
+  ){ 
 
   }
   startApp() {
     this.navCtrl.push(TabsPage).then(() => {
       //this.storage.set('hasSeenTutorial', 'true');
     })
+  }
+  ionViewDidEnter() {
+    // the root left menu should be disabled on the tutorial page
+    this.menu.enable(false);
+  }
+  ionViewDidLeave() {
+    // enable the root left menu when leaving the tutorial page
+    this.menu.enable(true);
   }
 
 

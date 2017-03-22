@@ -29,9 +29,9 @@ export class MyApp {
    @ViewChild(Nav) nav: Nav;
   rootPage: any;
   appPages: PageInterface[] = [
-    { title: 'Schedule', component: TabsPage, tabComponent: HomePage, icon: 'calendar' },
-    { title: 'Speakers', component: TabsPage, tabComponent: AboutPage, index: 1, icon: 'contacts' },
-    { title: 'Map', component: TabsPage, tabComponent: ContactPage, index: 2, icon: 'map' },
+    { title: 'Home', component: TabsPage, tabComponent: HomePage, icon: 'home' },
+    { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 1, icon: 'contacts' },
+    { title: 'Contact', component: TabsPage, tabComponent: ContactPage, index: 2, icon: 'map' },
   ];
   loggedOutPages = [
     { title: 'Login', component: LoginPage, icon: 'log-in' },
@@ -47,6 +47,10 @@ export class MyApp {
       this.rootPage =TutorialPage;
     });
   }
+  openTutorial() {
+    this.nav.setRoot(TutorialPage);
+  }
+
   openPage(page: PageInterface) {
     // the nav component was found using @ViewChild(Nav)
     // reset the nav to remove previous pages and only have this page

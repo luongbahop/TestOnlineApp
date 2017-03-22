@@ -1,12 +1,17 @@
 <ion-header no-border>
-  <ion-navbar>
-    <ion-buttons end *ngIf="showSkip">
-      <button ion-button (click)="startApp()" color="primary">Skip</button>
-    </ion-buttons>
+  <ion-navbar color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Welcome to SmartApp</ion-title>
+    
   </ion-navbar>
 </ion-header>
 
 <ion-content no-bounce>
+  <ion-buttons end *ngIf="showSkip">
+      <button ion-button (click)="startApp()" color="primary" clear>Skip</button>
+  </ion-buttons>
   <ion-slides pager>
     <ion-slide *ngFor="let slide of slides">
       <img [src]="slide.image" class="slide-image"/>
@@ -14,11 +19,10 @@
       <p [innerHTML]="slide.description"></p>
     </ion-slide>
     <ion-slide>
-      <ion-toolbar>
-      </ion-toolbar>
-      <img src="http://toeicbuilding.com/uploads/administrator1/image/anh-bia.jpg" class="slide-image"/>
+      
+      <img src="http://toeicbuilding.com/uploads/administrator1/image/slide/slider-1.jpg" class="slide-image"/>
       <h2 class="slide-title">Are you ready?</h2>
-      <button ion-button large clear icon-right color="primary">
+      <button ion-button large clear icon-right color="primary" (click)="startApp()">
         Continue
         <ion-icon name="arrow-forward"></ion-icon>
       </button>
