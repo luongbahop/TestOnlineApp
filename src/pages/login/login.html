@@ -7,7 +7,35 @@
 	</ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="pageLogin padding">
+	<ion-grid>
+		<ion-row>
+			<ion-col col-12><h3 >Please login your account to manage your study process.</h3></ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-2></ion-col>
+			<ion-col col-8>
+				<form (ngSubmit)="onLogin()">
+					<ion-input [(ngModel)]="login.username" type="text" placeholder="Username" name="username"></ion-input>
+					<ion-input [(ngModel)]="login.password" type="password" placeholder="Password" name="password"></ion-input>
+					<button ion-button color="secondary" round full>Login</button>
+				</form>
+			</ion-col>
+			<ion-col col-2></ion-col>
+		</ion-row>
 	
-d
+	</ion-grid>
 </ion-content>
+<ion-footer >
+		<ion-list class="loginSocial">
+			<ion-item >
+				<h2>Login via Facebook</h2>
+			</ion-item>
+				<ion-item>
+				<h2>Login via Google</h2>
+			</ion-item>
+				<ion-item>
+				<h2 (click)="openSignup()">Create a new account</h2>
+			</ion-item>
+		</ion-list>
+</ion-footer>
