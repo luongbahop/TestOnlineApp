@@ -3,34 +3,23 @@
   <!--  our side menu  -->
   <ion-menu [content]="content">
     <ion-header >
+      
       <ion-toolbar color="danger">
-        <ion-title>Menu</ion-title>
+        <ion-avatar class="menu-avatar">
+          <img src="http://img.v3.news.zdn.vn/w660/Uploaded/rugtzn/2014_07_14/18photographyguide27creativeselfportraitideastoshowoff934x.jpg">
+        </ion-avatar>
+        <h3 menuClose class="title" (click)="openLogin()">Đăng nhập</h3>
       </ion-toolbar>
     </ion-header>
     <ion-content class="">
-
       <ion-list>
-        <ion-list-header>
-          Navigate
-        </ion-list-header>
         <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
           <ion-icon item-left [name]="p.icon"></ion-icon>
           {{p.title}}
         </button>
       </ion-list>
+      
       <ion-list>
-        <ion-list-header>
-          Account
-        </ion-list-header>
-        <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
-          <ion-icon item-left [name]="p.icon" ></ion-icon>
-          {{p.title}}
-        </button>
-      </ion-list>
-      <ion-list>
-        <ion-list-header>
-          Tutorial
-        </ion-list-header>
         <button ion-item menuClose (click)="openTutorial()">
           <ion-icon item-left name="hammer"></ion-icon>
           Show Tutorial

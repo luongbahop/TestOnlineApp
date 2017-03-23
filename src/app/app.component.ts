@@ -1,8 +1,10 @@
+//import library
 import { Component,ViewChild } from '@angular/core';
 import { Platform,Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+//import pages
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { HomePage } from '../pages/home/home';
@@ -28,6 +30,7 @@ export interface PageInterface {
 export class MyApp {
    @ViewChild(Nav) nav: Nav;
   rootPage: any;
+  testData: any;
   appPages: PageInterface[] = [
     { title: 'Home', component: TabsPage, tabComponent: HomePage, icon: 'home' },
     { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 1, icon: 'contacts' },
@@ -39,16 +42,27 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+   
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
       this.rootPage =TutorialPage;
+
+  
+     console.log(this.rootPage);
+ 
+
+
     });
+    
   }
   openTutorial() {
     this.nav.setRoot(TutorialPage);
+  }
+  openLogin() {
+    this.nav.setRoot(LoginPage);
   }
 
   openPage(page: PageInterface) {
