@@ -3,12 +3,17 @@
   <!--  our side menu  -->
   <ion-menu [content]="content">
     <ion-header >
-      
-      <ion-toolbar color="danger">
+      <ion-toolbar color="danger" *ngIf="isLogged" >
         <ion-avatar class="menu-avatar">
-          <img src="http://img.v3.news.zdn.vn/w660/Uploaded/rugtzn/2014_07_14/18photographyguide27creativeselfportraitideastoshowoff934x.jpg">
+          <img src="{{userLogin.avatar}}"  menuClose class="title" (click)="openProfile()">
         </ion-avatar>
-        <h3 menuClose class="title" (click)="openLogin()">Đăng nhập</h3>
+        <h3  menuClose class="title" (click)="openProfile()">{{userLogin.username}}</h3>
+      </ion-toolbar>
+      <ion-toolbar color="danger" *ngIf="!isLogged" >
+        <ion-avatar class="menu-avatar">
+          <img src="/assets/images/user.png">
+        </ion-avatar>
+        <h3  menuClose class="title" (click)="openLogin()">Đăng nhập</h3>
       </ion-toolbar>
     </ion-header>
     <ion-content class="">

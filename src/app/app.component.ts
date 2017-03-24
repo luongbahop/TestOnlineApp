@@ -13,6 +13,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
+import { ProfilePage } from '../pages/profile/profile';
 
 export interface PageInterface {
   title: string;
@@ -29,9 +30,11 @@ export interface PageInterface {
 
 
 export class MyApp {
-   @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) nav: Nav;
   rootPage: any;
   testData: any;
+  isLogged=false;
+  userLogin={};
   appPages: PageInterface[] = [
     { title: 'Home', component: TabsPage, tabComponent: HomePage, icon: 'home' },
     { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 1, icon: 'contacts' },
@@ -43,26 +46,26 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public storage: Storage) {
-     this.storage.get('hasSeenTutorial')
-      .then((hasSeenTutorial) => {
-          if (hasSeenTutorial) {
-            console.log('xx',hasSeenTutorial);
-          } else {
-            console.log('xxssss');
+    this.storage.get('userLogin')
+      .then((userLogin) => {
+          if (userLogin) {
+            this.isLogged=true;
+            this.storage.get('userLogin').then((val) => {
+               this.userLogin=val;
+               console.log(this.userLogin);
+            })
           }
-        })
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-      this.rootPage =TutorialPage;
-     
-  
-     console.log(this.rootPage);
+      });
+    
+      platform.ready().then(() => {
+        // Okay, so the platform is ready and our plugins are available.
+        // Here you can do any higher level native things you might need.
+        statusBar.styleDefault();
+        splashScreen.hide();
+        this.rootPage =TutorialPage;
+    
+        console.log(this.rootPage);
  
-
-
     });
     
   }
@@ -71,6 +74,9 @@ export class MyApp {
   }
   openLogin() {
     this.nav.setRoot(LoginPage);
+  }
+  openProfile() {
+    this.nav.setRoot(ProfilePage);
   }
 
   openPage(page: PageInterface) {

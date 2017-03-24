@@ -16,8 +16,8 @@
 			<ion-col col-2></ion-col>
 			<ion-col col-8>
 				<form (ngSubmit)="onLogin()">
-					<ion-input [(ngModel)]="login.username" type="text" placeholder="Username" name="username"></ion-input>
-					<ion-input [(ngModel)]="login.password" type="password" placeholder="Password" name="password"></ion-input>
+					<p><ion-input [(ngModel)]="login.username" type="text" placeholder="Username" name="username"></ion-input></p>
+					<p><ion-input [(ngModel)]="login.password" type="password" placeholder="Password" name="password"></ion-input></p>
 					<button ion-button color="secondary" round full>Login</button>
 				</form>
 			</ion-col>
@@ -29,13 +29,13 @@
 <ion-footer >
 		<ion-list class="loginSocial">
 			<ion-item >
-				<h2>Login via Facebook</h2>
+				<h2 color="primary">Login via Facebook</h2>
 			</ion-item>
 				<ion-item>
-				<h2>Login via Google</h2>
+				<h2 color="primary">Login via Google</h2>
 			</ion-item>
 				<ion-item>
-				<h2 (click)="openSignup()">Create a new account</h2>
+				<h2 color="primary" (click)="openSignup()">Create a new account</h2>
 			</ion-item>
 		</ion-list>
 </ion-footer>

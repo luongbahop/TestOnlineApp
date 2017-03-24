@@ -14,6 +14,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
+import { ProfilePage } from '../pages/profile/profile';
+
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { SignupPage } from '../pages/signup/signup';
     TabsPage,
     TutorialPage,
     SignupPage,
-    LoginPage
+    LoginPage,
+    ProfilePage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -39,7 +43,8 @@ import { SignupPage } from '../pages/signup/signup';
     TabsPage,
     TutorialPage,
     SignupPage,
-    LoginPage
+    LoginPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
