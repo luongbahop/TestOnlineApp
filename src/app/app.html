@@ -5,9 +5,10 @@
     <ion-header >
       <ion-toolbar color="danger" *ngIf="isLogged" >
         <ion-avatar class="menu-avatar">
-          <img src="{{userLogin.avatar}}"  menuClose class="title" (click)="openProfile()">
+          <img src="{{avatarLogin}}"  menuClose class="title" (click)="openProfile()">
         </ion-avatar>
-        <h3  menuClose class="title" (click)="openProfile()">{{userLogin.username}}</h3>
+        <h3  menuClose class="title" (click)="openProfile()">{{fullNameLogin}}</h3>
+        <button menuClose (click)="logout()">Logout</button>
       </ion-toolbar>
       <ion-toolbar color="danger" *ngIf="!isLogged" >
         <ion-avatar class="menu-avatar">

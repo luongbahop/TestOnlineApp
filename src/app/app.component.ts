@@ -34,7 +34,9 @@ export class MyApp {
   rootPage: any;
   testData: any;
   isLogged=false;
-  userLogin={};
+  userLogin: string;
+  avatarLogin: string;
+  fullNameLogin:string;
   appPages: PageInterface[] = [
     { title: 'Home', component: TabsPage, tabComponent: HomePage, icon: 'home' },
     { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 1, icon: 'contacts' },
@@ -46,17 +48,11 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public storage: Storage) {
-    this.storage.get('userLogin')
-      .then((userLogin) => {
-          if (userLogin) {
-            this.isLogged=true;
-            this.storage.get('userLogin').then((val) => {
-               this.userLogin=val;
-               console.log(this.userLogin);
-            })
-          }
-      });
-    
+      if(localStorage.getItem('loginApp')!=null){
+        this.isLogged=true;
+        this.avatarLogin=localStorage.getItem('userAvatar');
+        this.fullNameLogin=localStorage.getItem('userFullname');
+      }
       platform.ready().then(() => {
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
@@ -69,8 +65,18 @@ export class MyApp {
     });
     
   }
+  logout(){
+    localStorage.removeItem('loginApp');
+    localStorage.removeItem('userAvatar');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userFullname');
+    this.isLogged=false;
+    this.nav.setRoot(LoginPage);
+
+  }
   openTutorial() {
     this.nav.setRoot(TutorialPage);
+
   }
   openLogin() {
     this.nav.setRoot(LoginPage);

@@ -1,8 +1,7 @@
 //import library
 import { Component,ViewChild } from '@angular/core';
-import { NavController,ToastController  } from 'ionic-angular';
+import { NavController,ToastController,Platform,LoadingController  } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Storage } from '@ionic/storage';
 
 //import pages
 import { SignupPage } from '../signup/signup';
@@ -17,24 +16,23 @@ import { UserData } from '../../providers/user-data';
 })
 export class LoginPage {
   login: {username?: string, password?: string} = {};
+  isLogged=false;
   constructor(
     public navCtrl: NavController,
     public toastCtrl: ToastController,
     public statusBar: StatusBar, 
-    public storage: Storage,
-    public userData: UserData
+    public userData: UserData,
+    public platform: Platform,
+    public loadingCtrl: LoadingController,
+    public nav: NavController
   ) {
-    this.storage.get('userLogin')
-      .then((userLogin) => {
-          if (userLogin) {
-            this.navCtrl.push(HomePage)
-            .then(() => {
-              const startIndex = this.navCtrl.getActive().index - 1;
-              this.navCtrl.remove(startIndex, 1);
-            });
-          }
-    });
-
+    if(localStorage.getItem('loginApp')!=null){
+      this.navCtrl.push(HomePage)
+        .then(() => {
+          const startIndex = this.navCtrl.getActive().index - 1;
+          this.navCtrl.remove(startIndex, 1);
+        });
+    }
   }
   onLogin(){
     //valid data
@@ -53,16 +51,24 @@ export class LoginPage {
       });
       toast.present();
     }else{
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+
+      loading.present();
       //check user existed or not
       this.userData.login(this.login.username,this.login.password).subscribe(
           data => {
-              // set a userLogin storage
-              this.storage.set('userLogin', data);
-              this.navCtrl.push(HomePage);
-              // // Or to get a key/value pair
-              // this.storage.get('name').then((name) => {
-              //   console.log('Your age is', name);
-              // })
+              localStorage.setItem('loginApp',data.username);
+              localStorage.setItem('userAvatar',data.avatar);
+              localStorage.setItem('userEmail',data.email);
+              localStorage.setItem('userFullname',data.fullname);
+              this.isLogged=true;
+              
+              setTimeout(() => {
+                this.nav.setRoot(HomePage)
+                loading.dismiss();
+              }, 1000);
           },
           err => {
               let toast = this.toastCtrl.create({

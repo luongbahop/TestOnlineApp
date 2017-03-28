@@ -11,7 +11,7 @@ export class UserData {
     }
   
     login(username,password) {
-       var url = 'http://donghuongtrucmy.vn/json.php?type=login&e='+username+'&p='+password;
+       var url = 'http://www.donghuongtrucmy.vn/json.php?type=login&e='+username+'&p='+password;
        var response = this.http.get(url).map(res => res.json());
        return response;
     }
