@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">Cancel</button>
+    </ion-buttons>
+
+    <ion-title>
+      Filter Sessions
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="applyFilters()" strong>Done</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="outer-content">
+
+  <ion-list>
+    <ion-list-header>Category</ion-list-header>
+    <ion-item  >
+      <ion-select [(ngModel)]="category" name="category">
+          <ion-option selected="true" value="sports">Sports</ion-option>
+          <ion-option value="food">Food</ion-option>
+          <ion-option value="news">News</ion-option>
+          <ion-option value="music">Music</ion-option>
+          <ion-option value="funny">Funny</ion-option>
+          <ion-option value="gaming">Gaming</ion-option>
+          <ion-option value="art">Art</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>Limit</ion-list-header>
+    <ion-item  >
+      <ion-input type="text" value="10" [(ngModel)]="limit" name="limit"></ion-input>
+    </ion-item>
+  </ion-list>
+
+
+  
+
+  <ion-list>
+    <button ion-item (click)="resetFilters()" detail-none class="reset-filters">
+      Reset All Filters
+    </button>
+  </ion-list>
+
+</ion-content>
