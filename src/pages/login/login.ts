@@ -34,6 +34,9 @@ export class LoginPage {
         });
     }
   }
+  ionViewWillEnter() {
+    console.log("I'm alive!");
+  }
   onLogin(){
     //valid data
     if(this.login.username==''){
@@ -64,9 +67,16 @@ export class LoginPage {
               localStorage.setItem('userEmail',data.email);
               localStorage.setItem('userFullname',data.fullname);
               this.isLogged=true;
+                this.nav.setRoot(HomePage);
               
               setTimeout(() => {
-                this.nav.setRoot(HomePage)
+                this.isLogged=true;
+                this.navCtrl.push(HomePage,{data:true})
+                .then(() => {
+                  const startIndex = this.navCtrl.getActive().index - 1;
+                  this.navCtrl.remove(startIndex, 1);
+                });
+                
                 loading.dismiss();
               }, 1000);
           },

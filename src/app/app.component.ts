@@ -48,6 +48,7 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public storage: Storage) {
+    console.log(localStorage.getItem('loginApp'),123);
       if(localStorage.getItem('loginApp')!=null){
         this.isLogged=true;
         this.avatarLogin=localStorage.getItem('userAvatar');
@@ -64,6 +65,11 @@ export class MyApp {
  
     });
     
+  }
+  ionViewWillEnter() {
+    console.log("I'm alive!");
+  }
+  ngOnInit(){
   }
   logout(){
     localStorage.removeItem('loginApp');
