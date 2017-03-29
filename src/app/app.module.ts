@@ -15,7 +15,7 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ProfilePage } from '../pages/profile/profile';
-
+import { DetailPage } from '../pages/detail/detail';
 
 
 @NgModule({
@@ -28,7 +28,8 @@ import { ProfilePage } from '../pages/profile/profile';
     TutorialPage,
     SignupPage,
     LoginPage,
-    ProfilePage
+    ProfilePage,
+    DetailPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -44,7 +45,8 @@ import { ProfilePage } from '../pages/profile/profile';
     TutorialPage,
     SignupPage,
     LoginPage,
-    ProfilePage
+    ProfilePage,
+    DetailPage
   ],
   providers: [
     StatusBar,
