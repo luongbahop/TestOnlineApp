@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { NavController } from 'ionic-angular';
+import { NavController,Events } from 'ionic-angular';
 
-//import { TabsPage } from '../tabs/tabs';
-//import { UserData } from '../../providers/user-data';
+import { HomePage } from '../home/home';
 
 
 @Component({
@@ -12,8 +11,28 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
- 
-  constructor(public navCtrl: NavController) {}
+  isLogged: any;
+
+  username = localStorage.getItem('loginApp');
+  userFullname = localStorage.getItem('userFullname');
+  userAvatar = localStorage.getItem('userAvatar');
+  userEmail = localStorage.getItem('userEmail');
+
+  constructor(public navCtrl: NavController,public events: Events) {}
+  logout(){
+    localStorage.removeItem('loginApp');
+    localStorage.removeItem('userAvatar');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userFullname');
+    this.isLogged=false;
+    this.events.publish('user:logout');
+    this.navCtrl.push(HomePage)
+      .then(() => {
+        const startIndex = this.navCtrl.getActive().index - 1;
+        this.navCtrl.remove(startIndex, 1);
+      });
+
+  }
 
 
 }

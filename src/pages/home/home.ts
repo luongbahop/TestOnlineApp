@@ -4,6 +4,7 @@ import {
   NavController,
   LoadingController,
   ModalController,
+  NavParams,
   App 
 } from 'ionic-angular';
 import {Reddit} from '../../providers/reddit';
@@ -25,6 +26,7 @@ export class HomePage {
     private reddit: Reddit,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
+    public paramsCtrl: NavParams,
     public app: App,
   ){
     this.getDefaults();

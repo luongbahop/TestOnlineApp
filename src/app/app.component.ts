@@ -1,6 +1,6 @@
 //import library
 import { Component,ViewChild } from '@angular/core';
-import { Platform,Nav } from 'ionic-angular';
+import { Platform,Nav,Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
@@ -47,8 +47,8 @@ export class MyApp {
     { title: 'Signup', component: SignupPage, icon: 'person-add' }
   ];
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public storage: Storage) {
-    console.log(localStorage.getItem('loginApp'),123);
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public storage: Storage,  public events: Events,) {
+    //console.log(localStorage.getItem('loginApp'),123);
       if(localStorage.getItem('loginApp')!=null){
         this.isLogged=true;
         this.avatarLogin=localStorage.getItem('userAvatar');
@@ -64,6 +64,7 @@ export class MyApp {
         console.log(this.rootPage);
  
     });
+    this.listenToLoginEvents();
     
   }
   ionViewWillEnter() {
@@ -71,15 +72,7 @@ export class MyApp {
   }
   ngOnInit(){
   }
-  logout(){
-    localStorage.removeItem('loginApp');
-    localStorage.removeItem('userAvatar');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userFullname');
-    this.isLogged=false;
-    this.nav.setRoot(LoginPage);
-
-  }
+  
   openTutorial() {
     this.nav.setRoot(TutorialPage);
 
@@ -89,6 +82,21 @@ export class MyApp {
   }
   openProfile() {
     this.nav.setRoot(ProfilePage);
+  }
+  listenToLoginEvents() {
+    this.events.subscribe('user:login', () => {
+      this.isLogged=true;
+      this.avatarLogin=localStorage.getItem('userAvatar');
+      this.fullNameLogin=localStorage.getItem('userFullname');
+    });
+
+    this.events.subscribe('user:signup', () => {
+      //this.enableMenu(true);
+    });
+
+    this.events.subscribe('user:logout', () => {
+      this.isLogged=false;
+    });
   }
 
   openPage(page: PageInterface) {

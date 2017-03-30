@@ -8,7 +8,7 @@
           <img src="{{avatarLogin}}"  menuClose class="title" (click)="openProfile()">
         </ion-avatar>
         <h3  menuClose class="title" (click)="openProfile()">{{fullNameLogin}}</h3>
-        <button menuClose (click)="logout()">Logout</button>
+        
       </ion-toolbar>
       <ion-toolbar color="danger" *ngIf="!isLogged" >
         <ion-avatar class="menu-avatar">

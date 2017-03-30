@@ -1,6 +1,6 @@
 //import library
 import { Component,ViewChild } from '@angular/core';
-import { NavController,ToastController,Platform,LoadingController  } from 'ionic-angular';
+import { NavController,ToastController,Platform,LoadingController,Events  } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 
 //import pages
@@ -24,7 +24,8 @@ export class LoginPage {
     public userData: UserData,
     public platform: Platform,
     public loadingCtrl: LoadingController,
-    public nav: NavController
+    public nav: NavController,
+    public events: Events
   ) {
     if(localStorage.getItem('loginApp')!=null){
       this.navCtrl.push(HomePage)
@@ -35,7 +36,7 @@ export class LoginPage {
     }
   }
   ionViewWillEnter() {
-    console.log("I'm alive!");
+    //console.log("I'm alive!");
   }
   onLogin(){
     //valid data
@@ -66,19 +67,18 @@ export class LoginPage {
               localStorage.setItem('userAvatar',data.avatar);
               localStorage.setItem('userEmail',data.email);
               localStorage.setItem('userFullname',data.fullname);
-              this.isLogged=true;
-                this.nav.setRoot(HomePage);
-              
+              this.events.publish('user:login');
+
               setTimeout(() => {
                 this.isLogged=true;
-                this.navCtrl.push(HomePage,{data:true})
+                this.navCtrl.push(HomePage)
                 .then(() => {
                   const startIndex = this.navCtrl.getActive().index - 1;
                   this.navCtrl.remove(startIndex, 1);
                 });
                 
                 loading.dismiss();
-              }, 1000);
+              }, 300);
           },
           err => {
               let toast = this.toastCtrl.create({
