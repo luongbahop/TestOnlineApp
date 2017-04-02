@@ -3,7 +3,19 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler,LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { IonicStorageModule } from '@ionic/storage';
+// Import the AF2 Module
+import { AngularFireModule } from 'angularfire2';
+// AF2 Settings
+export const firebaseConfig = {
+  apiKey: "AIzaSyCZZGVdty7x_zgzsDcDsdnAYjAmGAqC23E",
+  authDomain: "luongbahop1993.firebaseapp.com",
+  databaseURL: "https://luongbahop1993.firebaseio.com",
+  projectId: "luongbahop1993",
+  storageBucket: "luongbahop1993.appspot.com",
+  messagingSenderId: "250214590235"
+};
+
+
 
 //import pages
 import { MyApp } from './app.component';
@@ -34,7 +46,7 @@ import { FilterPage } from '../pages/filter/filter';
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

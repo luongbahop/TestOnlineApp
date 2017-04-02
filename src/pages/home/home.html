@@ -31,6 +31,17 @@
 
 <ion-content padding>
   <h2>Welcome to SmartApp</h2>
+  <ion-buttons end>
+    <button ion-button icon-only (click)="addSong()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-list>
+    <ion-item *ngFor="let song of songs | async" (click)="showOptions(song.$key, song.title)">
+      {{song.title}}
+    </ion-item>
+  </ion-list>
+  
 
   <ion-card *ngFor=" let item of items ">
 

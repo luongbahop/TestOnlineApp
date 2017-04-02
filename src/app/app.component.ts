@@ -3,7 +3,6 @@ import { Component,ViewChild } from '@angular/core';
 import { Platform,Nav,Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Storage } from '@ionic/storage';
 
 //import pages
 import { TabsPage } from '../pages/tabs/tabs';
@@ -47,7 +46,7 @@ export class MyApp {
     { title: 'Signup', component: SignupPage, icon: 'person-add' }
   ];
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public storage: Storage,  public events: Events,) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public events: Events,) {
     //console.log(localStorage.getItem('loginApp'),123);
       if(localStorage.getItem('loginApp')!=null){
         this.isLogged=true;
