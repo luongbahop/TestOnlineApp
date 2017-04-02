@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar no-border-bottom color="danger" hideBackButton >
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()" color="primary">
+      <ion-segment-button value="all">
+        All
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+        Favorites
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentFilter()">
+        <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-searchbar color="primary"
+                   [(ngModel)]="queryText"
+                   (ionInput)="updateSchedule()"
+                   placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Welcome to SmartApp</h2>
+  <ion-buttons end>
+    <button ion-button icon-only (click)="addSong()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-list>
+    <ion-item *ngFor="let song of songs | async" (click)="showOptions(song.$key, song.title)">
+      {{song.title}}
+    </ion-item>
+  </ion-list>
+  
+
+  <ion-card *ngFor=" let item of items ">
+
+    <ion-item>
+      <ion-avatar item-left *ngIf="item.data.thumbnail">
+        <img src="{{item.data.thumbnail}}">
+      </ion-avatar>
+      <h2>{{item.data.title}}</h2>
+      <p>November 5, 1955</p>
+    </ion-item>
+
+    <img src="{{item.data.thumbnail}}" (click)= "viewItem(item.data)">
+
+    <ion-card-content>
+      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>12 Likes</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>4 Comments</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          11h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>

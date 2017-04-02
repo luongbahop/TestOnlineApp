@@ -1,0 +1,58 @@
+<ion-header>
+	<ion-navbar color="danger">
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>{{userFullname}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="profile-page">
+		<ion-toolbar color="danger" >
+			<ion-avatar class="menu-avatar">
+				<img src="{{userAvatar}}" >
+			</ion-avatar>
+			<h3>{{userFullname}}</h3>
+			<button menuClose (click)="logout()">Logout</button>
+		</ion-toolbar>
+		 <ion-list no-border>
+
+    <ion-list-header>
+      Classes
+    </ion-list-header>
+
+    <ion-item>
+      <ion-icon name='planet' item-left></ion-icon>
+      Astronomy
+      <ion-note item-right>
+      To the moon
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-toggle checked="false"></ion-toggle>
+      <ion-label>
+        Muggle Studies
+      </ion-label>
+      <ion-icon name='body' item-left></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name='leaf' item-left></ion-icon>
+      Herbology
+      <ion-icon name='rose' item-right color="secondary"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name='flask' item-left></ion-icon>
+      Potions
+      <ion-note item-right>
+      Poisonous
+      </ion-note>
+    </ion-item>
+
+
+
+  </ion-list>
+
+</ion-content>

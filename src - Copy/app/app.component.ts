@@ -5,7 +5,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 //import pages
-import { AuthPage } from '../pages/auth/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { HomePage } from '../pages/home/home';
@@ -14,11 +13,6 @@ import { ContactPage } from '../pages/contact/contact';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ProfilePage } from '../pages/profile/profile';
-
-//import  providers
-import { DataProvider } from '../providers/data';
-import { AuthProvider } from '../providers/auth';
-
 
 export interface PageInterface {
   title: string;
@@ -36,12 +30,7 @@ export interface PageInterface {
 
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
-  isAppInitialized: boolean = false;
-  user: any;
-  rootPage: any = AuthPage;
-
-
+  rootPage: any;
   testData: any;
   isLogged=false;
   userLogin: string;
@@ -53,41 +42,34 @@ export class MyApp {
     { title: 'Contact', component: TabsPage, tabComponent: ContactPage, index: 2, icon: 'map' },
   ];
   loggedOutPages = [
-    { title: 'Login', component: AuthPage, icon: 'log-in' },
+    { title: 'Login', component: LoginPage, icon: 'log-in' },
     { title: 'Signup', component: SignupPage, icon: 'person-add' }
   ];
-   constructor(
-    public splashScreen: SplashScreen,
-    public statusBar: StatusBar,
-     public events: Events,
-    private platform: Platform,
-    protected data: DataProvider,
-    protected auth: AuthProvider) {
-      this.user = {
-        image: ''
-      };
-  }
 
-  /*
-    - Check that user is logging or not
-  */ 
-  ngOnInit() {
-    this.platform.ready().then(() => {
-      this.auth.getUserData().subscribe(data => {
-        if (!this.isAppInitialized) {
-          this.nav.setRoot(HomePage);
-          this.isAppInitialized = true;
-        }
-        this.user = data;
-        // this.data.list('pets').subscribe(data => {
-        //   console.log(data);
-        // });
-      }, err => {
-        this.nav.setRoot(AuthPage);
-      });
-      this.splashScreen.hide();
-      this.statusBar.styleDefault();
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public events: Events,) {
+    //console.log(localStorage.getItem('loginApp'),123);
+      if(localStorage.getItem('loginApp')!=null){
+        this.isLogged=true;
+        this.avatarLogin=localStorage.getItem('userAvatar');
+        this.fullNameLogin=localStorage.getItem('userFullname');
+      }
+      platform.ready().then(() => {
+        // Okay, so the platform is ready and our plugins are available.
+        // Here you can do any higher level native things you might need.
+        statusBar.styleDefault();
+        splashScreen.hide();
+        this.rootPage =TutorialPage;
+    
+        console.log(this.rootPage);
+ 
     });
+    this.listenToLoginEvents();
+    
+  }
+  ionViewWillEnter() {
+    console.log("I'm alive!");
+  }
+  ngOnInit(){
   }
   
   openTutorial() {

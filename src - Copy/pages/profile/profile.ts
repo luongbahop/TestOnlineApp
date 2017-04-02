@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { NavController,Events } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
-import { AuthProvider } from '../../providers/auth';
+
 
 @Component({
   selector: 'page-profile',
@@ -18,9 +18,8 @@ export class ProfilePage {
   userAvatar = localStorage.getItem('userAvatar');
   userEmail = localStorage.getItem('userEmail');
 
-  constructor(public navCtrl: NavController,public events: Events,private auth: AuthProvider) {}
+  constructor(public navCtrl: NavController,public events: Events) {}
   logout(){
-    this.auth.logout();
     localStorage.removeItem('loginApp');
     localStorage.removeItem('userAvatar');
     localStorage.removeItem('userEmail');

@@ -15,19 +15,10 @@ export const firebaseConfig = {
   messagingSenderId: "250214590235"
 };
 
-// Providers
-import { DataProvider } from '../providers/data';
-import { AuthProvider } from '../providers/auth';
+
 
 //import pages
 import { MyApp } from './app.component';
-
-import { AuthPage } from '../pages/auth/home/home';
-import { ForgotPasswordPage } from '../pages/auth/forgot-password/forgot-password';
-import { LoginEmailPage } from '../pages/auth/login-email/login-email';
-import { SignUpPage } from '../pages/auth/sign-up/sign-up';
-
-import { TermsOfServicePage } from '../pages/terms-of-service/terms-of-service';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -42,10 +33,6 @@ import { FilterPage } from '../pages/filter/filter';
 @NgModule({
   declarations: [
     MyApp,
-    ForgotPasswordPage,
-    AuthPage,
-    LoginEmailPage,
-    SignUpPage,
     AboutPage,
     ContactPage,
     HomePage,
@@ -55,8 +42,7 @@ import { FilterPage } from '../pages/filter/filter';
     LoginPage,
     ProfilePage,
     DetailPage,
-    FilterPage,
-    TermsOfServicePage
+    FilterPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -65,10 +51,6 @@ import { FilterPage } from '../pages/filter/filter';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ForgotPasswordPage,
-    AuthPage,
-    LoginEmailPage,
-    SignUpPage,
     AboutPage,
     ContactPage,
     HomePage,
@@ -78,15 +60,12 @@ import { FilterPage } from '../pages/filter/filter';
     LoginPage,
     ProfilePage,
     DetailPage,
-    FilterPage,
-    TermsOfServicePage
+    FilterPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataProvider, 
-    AuthProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

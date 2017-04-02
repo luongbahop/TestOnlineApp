@@ -1,0 +1,24 @@
+// Styles for all of the user pages:
+// Login, Signup, Support
+
+.pageLogin{
+ p{
+   padding: 0px 10px;
+   border: 1px solid #ddd;
+ }
+ h3{
+    text-align: center;
+    padding: 1em 0em;
+    font-weight: lighter;
+  }
+}
+.loginSocial{
+  margin-bottom: 0;
+  ion-item{
+   h2{
+      text-align: center;
+      font-size: 1.2em;
+      padding: 0.4em;
+   }
+  }
+}
