@@ -10,7 +10,11 @@
   .logo{
     height: 30%;
   }
-
+  .list-input{
+    ion-item{
+      margin-bottom: 10px;
+    }
+  }
   form {
     width: 95%;
     margin: auto;
