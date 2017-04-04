@@ -1,7 +1,6 @@
 .login-email {
-  background-image: url("../../assets/img/auth-background.jpg");
-  background-size: 100%;
-  background-position-y: 50%;
+  background: url("../../assets/images/bg.jpg") center no-repeat;
+  background-size: cover;
 
   .forgot-password-txt {
     width: 50%;
@@ -12,6 +11,9 @@
     width: 50%;
     text-align: right;
     color: white;
+  }
+  .logo{
+    height: 30%;
   }
 
   form {

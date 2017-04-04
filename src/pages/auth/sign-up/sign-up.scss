@@ -1,12 +1,14 @@
 .sign-up {
-  background-image: url("../../assets/img/auth-background.jpg");
-  background-size: 100%;
-  background-position-y: 50%;
+  background: url("../../assets/images/bg.jpg") no-repeat center;
+  background-size: cover;
 
   .log-in-txt {
     width: 100%;
     text-align: right;
     color: white;
+  }
+  .logo{
+    height: 30%;
   }
 
   form {

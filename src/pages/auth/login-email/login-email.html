@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>
       Log In with Email
     </ion-title>
@@ -15,7 +15,13 @@
       Sign Up
     </div>
   </ion-row>
-
+  <div class="logo">
+    <div class="logo-icon">
+       <ion-avatar class="menu-avatar">
+          <img src="./assets/images/logo.png"/>
+        </ion-avatar>
+    </div>
+  </div>
   <form (ngSubmit)="login()" #loginForm="ngForm">
     <ion-list>
       <ion-item>

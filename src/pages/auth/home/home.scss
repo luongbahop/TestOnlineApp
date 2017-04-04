@@ -1,7 +1,7 @@
 .auth-home {
-  background-image: url("../../assets/img/auth-background.jpg");
-  background-size: 100%;
-  background-position-y: 50%;
+  background: url("../../assets/images/bg.jpg") no-repeat center;
+  background-size: cover;
+  
 
   .logo {
     height: 50%;
@@ -19,6 +19,9 @@
     margin: auto;
     width: 95%;
     margin-bottom: 5px;
+    ion-icon{
+      margin-right: 10px;
+    }
   }
 
   .google-btn {
