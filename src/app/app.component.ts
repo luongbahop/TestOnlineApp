@@ -78,6 +78,7 @@ export class MyApp {
           this.nav.setRoot(HomePage);
           this.isAppInitialized = true;
         }
+        console.log(data,'dit nhau')
         this.user = data;
         // this.data.list('pets').subscribe(data => {
         //   console.log(data);

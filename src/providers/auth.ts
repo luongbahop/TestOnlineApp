@@ -41,6 +41,7 @@ export class AuthProvider {
         this.af.database.list('users').update(authData.uid, {
           name: authData.auth.email,
           email: authData.auth.email,
+          fullname: authData.auth.name,
           emailVerified: false,
           provider: 'email',
           image: 'https://freeiconshop.com/files/edd/person-solid.png'
