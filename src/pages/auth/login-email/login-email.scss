@@ -1,7 +1,7 @@
 .login-email {
-  background: url('assets/images/bg.jpg')  no-repeat center;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url('../assets/images/bg.jpg')  no-repeat center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
   background-size: cover;
 
   .forgot-password-txt {
@@ -16,6 +16,11 @@
   }
   .logo{
     height: 30%;
+  }
+  .list-input{
+    ion-item{
+      margin-bottom: 10px;
+    }
   }
 
   form {
