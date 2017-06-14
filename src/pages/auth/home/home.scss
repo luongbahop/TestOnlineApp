@@ -1,7 +1,7 @@
 .auth-home {
-  background-image: url("../../assets/images/bg.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url('assets/images/bg.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
   background-size: cover;
   
 
