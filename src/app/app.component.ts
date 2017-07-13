@@ -1,18 +1,19 @@
 //import library
-import { Component,ViewChild } from '@angular/core';
-import { Platform,Nav,Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, Nav, Events, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 //import pages
 import { AuthPage } from '../pages/auth/home/home';
+import { LoginEmailPage } from '../pages/auth/login-email/login-email';
+import { SignUpPage } from '../pages/auth/sign-up/sign-up';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
-import { LoginPage } from '../pages/login/login';
-import { SignupPage } from '../pages/signup/signup';
+
 import { ProfilePage } from '../pages/profile/profile';
 
 //import  providers
@@ -43,10 +44,10 @@ export class MyApp {
 
 
   testData: any;
-  isLogged=false;
+  isLogged = false;
   userLogin: string;
   avatarLogin: string;
-  fullNameLogin:string;
+  fullNameLogin: string;
   appPages: PageInterface[] = [
     { title: 'Home', component: TabsPage, tabComponent: HomePage, icon: 'home' },
     { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 1, icon: 'contacts' },
@@ -54,58 +55,89 @@ export class MyApp {
   ];
   loggedOutPages = [
     { title: 'Login', component: AuthPage, icon: 'log-in' },
-    { title: 'Signup', component: SignupPage, icon: 'person-add' }
+    { title: 'Signup', component: SignUpPage, icon: 'person-add' }
   ];
-   constructor(
-    public splashScreen: SplashScreen,
-    public statusBar: StatusBar,
-     public events: Events,
+  constructor(
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar,
+    private events: Events,
     private platform: Platform,
-    protected data: DataProvider,
-    protected auth: AuthProvider) {
-      this.user = {
-        image: ''
-      };
+    private alertCtrl: AlertController,
+    private data: DataProvider,
+    private auth: AuthProvider) {
+
+
   }
 
   /*
     - Check that user is logging or not
-  */ 
+  */
   ngOnInit() {
+
     this.platform.ready().then(() => {
       this.auth.getUserData().subscribe(data => {
         if (!this.isAppInitialized) {
           this.nav.setRoot(HomePage);
           this.isAppInitialized = true;
+          if (typeof data.email !== 'undefined' && data.email !== '') this.user = data;
+          else this.nav.setRoot(AuthPage);
         }
-        console.log(data,'dit nhau')
-        this.user = data;
-        // this.data.list('pets').subscribe(data => {
-        //   console.log(data);
-        // });
       }, err => {
         this.nav.setRoot(AuthPage);
       });
       this.splashScreen.hide();
       this.statusBar.styleDefault();
+      this.events.subscribe('user:login', () => {
+        this.auth.getUserData().subscribe(data => {
+          if (typeof data.email !== 'undefined' && data.email !== '') {
+            this.user = data;
+            this.nav.setRoot(HomePage);
+          } else {
+            alert('faild');
+          }
+        }, err => {
+          this.nav.setRoot(AuthPage);
+        });
+      });
     });
   }
-  
+  onPageDidEnter() {
+
+  }
+
   openTutorial() {
     this.nav.setRoot(TutorialPage);
 
   }
   openLogin() {
-    this.nav.setRoot(LoginPage);
+    this.nav.setRoot(LoginEmailPage);
   }
   openProfile() {
     this.nav.setRoot(ProfilePage);
   }
+
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Good bye',
+      subTitle: 'See you in the next time',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+  logout() {
+    this.auth.logout();
+    this.isLogged = false;
+    this.events.publish('user:logout');
+    this.presentAlert();
+    this.nav.setRoot(AuthPage);
+
+  }
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-      this.isLogged=true;
-      this.avatarLogin=localStorage.getItem('userAvatar');
-      this.fullNameLogin=localStorage.getItem('userFullname');
+      this.isLogged = true;
+      alert('ok');
+
+
     });
 
     this.events.subscribe('user:signup', () => {
@@ -113,7 +145,7 @@ export class MyApp {
     });
 
     this.events.subscribe('user:logout', () => {
-      this.isLogged=false;
+      this.isLogged = false;
     });
   }
 
@@ -129,6 +161,6 @@ export class MyApp {
       });
     }
 
-    
+
   }
 }

@@ -12,11 +12,7 @@ import {DataProvider} from './data';
 export class AuthProvider {
   user: any;
   constructor(private af: AngularFire, private data: DataProvider, private platform: Platform) {
-    this.af.database.list('pushTest').push({
-      teste: 'teste'
-    }).then((data) => {
-      console.log(data);
-    });
+   
   }
 
   getUserData() {
@@ -24,7 +20,6 @@ export class AuthProvider {
       this.af.auth.subscribe(authData => {
         if (authData) {
           this.data.object('users/' + authData.uid).subscribe(userData => {
-            console.log(userData);
             this.user = userData;
             observer.next(userData);
           });
@@ -39,12 +34,12 @@ export class AuthProvider {
     return Observable.create(observer => {
       this.af.auth.createUser(credentials).then((authData: any) => {
         this.af.database.list('users').update(authData.uid, {
-          name: authData.auth.email,
           email: authData.auth.email,
-          fullname: authData.auth.name,
-          emailVerified: false,
+          name: authData.auth.email,
+          emailVerified: true,
           provider: 'email',
-          image: 'https://freeiconshop.com/files/edd/person-solid.png'
+          image: 'https://freeiconshop.com/files/edd/person-solid.png',
+          displayName:authData.auth.displayName,
         });
         credentials.created = true;
         observer.next(credentials);

@@ -25,7 +25,7 @@
           <form (ngSubmit)="register()" #signUpForm="ngForm">
             <ion-list class="list-input">
               <ion-item>
-                <ion-input type="text" placeholder="Fullname" [(ngModel)]="form.name" name="name"></ion-input>
+                <ion-input type="text" placeholder="Your name" [(ngModel)]="form.displayName" name="displayName"></ion-input>
               </ion-item>
               <ion-item>
                 <ion-input type="text" placeholder="E-mail" [(ngModel)]="form.email" name="email"></ion-input>

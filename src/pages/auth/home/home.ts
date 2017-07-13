@@ -1,4 +1,4 @@
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController, IonicApp } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { LoginEmailPage } from '../login-email/login-email';
 import { SignUpPage } from '../sign-up/sign-up';
@@ -15,10 +15,17 @@ import { HomePage } from '../../home/home';
 export class AuthPage {
   error: any;
 
-  constructor(private navCtrl: NavController, private auth: AuthProvider) {}
+  constructor(public navCtrl: NavController, public auth: AuthProvider, public menuCtrl: MenuController, public ionicApp: IonicApp) {
+    this.menuCtrl.swipeEnable(false);
+    this.auth.getUserData().subscribe(data => {
+          if(typeof data.email !== 'undefined' && data.email !== '')this.navCtrl.push(HomePage);
+      }, err => {
+        this.error = err;
+      });
+  }
 
   ngOnInit() {
-
+    
   }
 
   openSignUpPage() {

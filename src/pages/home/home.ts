@@ -7,7 +7,8 @@ import {
   NavParams,
   AlertController,
   ActionSheetController,
-  App 
+  App ,
+  MenuController
 } from 'ionic-angular';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
@@ -35,13 +36,14 @@ export class HomePage {
     public modalCtrl: ModalController,
     public paramsCtrl: NavParams,
     public app: App,
+    public menuCtrl: MenuController,
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     af: AngularFire
   ){
+    this.menuCtrl.swipeEnable(true);
     this.getDefaults();
     this.songs = af.database.list('/songs');
-    console.log(this.songs,"song");
   }
   addSong(){
     let prompt = this.alertCtrl.create({

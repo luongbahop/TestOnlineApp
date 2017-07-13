@@ -3,18 +3,11 @@
   <!--  our side menu  -->
   <ion-menu [content]="content">
     <ion-header >
-      <ion-toolbar color="danger" *ngIf="isLogged" >
+      <ion-toolbar color="danger" *ngIf="this.user" >
         <ion-avatar class="menu-avatar">
-          <img src="{{avatarLogin}}"  menuClose class="title" (click)="openProfile()">
+          <img src="https://scontent.fhan3-1.fna.fbcdn.net/v/t1.0-1/p160x160/19424236_1346856008766241_4323090789144501141_n.jpg?oh=98edd4bbba45b683535d23c5f3aef39a&oe=59D3458F">
         </ion-avatar>
-        <h3  menuClose class="title" (click)="openProfile()">{{fullNameLogin}}</h3>
-        
-      </ion-toolbar>
-      <ion-toolbar color="danger" *ngIf="!isLogged" >
-        <ion-avatar class="menu-avatar">
-          <img src="assets/images/user.png">
-        </ion-avatar>
-        <h3  menuClose class="title" (click)="openProfile()">Đăng nhập</h3>
+        <h3  menuClose class="title" (click)="openProfile()">{{this.user.email || 'No name'}}</h3>
       </ion-toolbar>
     </ion-header>
     <ion-content class="">
@@ -31,10 +24,16 @@
           Show Tutorial
         </button>
       </ion-list>
+      <ion-list>
+        <button ion-item menuClose (click)="logout()">
+          <ion-icon item-left name="log-out"></ion-icon>
+          Logout
+        </button>
+      </ion-list>
 
     </ion-content>
   </ion-menu>
 
 
   <!-- the main content -->
-  <ion-nav [root]="rootPage"  #content main></ion-nav>
+  <ion-nav id="myMenu" [root]="rootPage"  #content main></ion-nav>

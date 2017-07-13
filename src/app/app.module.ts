@@ -1,6 +1,6 @@
 //import library
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler,LoadingController } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler,LoadingController, } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // Import the AF2 Module
@@ -33,8 +33,6 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
-import { LoginPage } from '../pages/login/login';
-import { SignupPage } from '../pages/signup/signup';
 import { ProfilePage } from '../pages/profile/profile';
 import { DetailPage } from '../pages/detail/detail';
 import { FilterPage } from '../pages/filter/filter';
@@ -51,8 +49,6 @@ import { FilterPage } from '../pages/filter/filter';
     HomePage,
     TabsPage,
     TutorialPage,
-    SignupPage,
-    LoginPage,
     ProfilePage,
     DetailPage,
     FilterPage,
@@ -74,8 +70,6 @@ import { FilterPage } from '../pages/filter/filter';
     HomePage,
     TabsPage,
     TutorialPage,
-    SignupPage,
-    LoginPage,
     ProfilePage,
     DetailPage,
     FilterPage,
@@ -84,9 +78,9 @@ import { FilterPage } from '../pages/filter/filter';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: ErrorHandler , useClass: IonicErrorHandler},
     DataProvider, 
-    AuthProvider
+    AuthProvider,
   ]
 })
 export class AppModule {}
